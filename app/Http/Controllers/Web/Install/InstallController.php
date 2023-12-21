@@ -225,7 +225,7 @@ class InstallController extends Controller
 			'site_name'       => 'required',
 			'site_slogan'     => 'required',
 			'name'            => 'required',
-			'purchase_code'   => 'required',
+			// 'purchase_code'   => 'required',
 			'email'           => 'required|email',
 			'password'        => 'required',
 			'default_country' => 'required',
@@ -291,13 +291,13 @@ class InstallController extends Controller
 			session()->forget('siteInfo');
 			
 			// Check purchase code
-			$purchaseCodeData = $this->purchaseCodeChecker(request()->input('purchase_code'));
+			// $purchaseCodeData = $this->purchaseCodeChecker(request()->input('purchase_code'));
 
 			// Merge all rules
 			$rules = array_merge($rules, $mailRules[$mailDriver] ?? []);
 			
 			// Validate requirements
-			$validatedData = request()->validate($rules, $messages);
+			// $validatedData = request()->validate($rules, $messages);
 			
 			// Check mail sending parameters
 			if ($validateDriverParameters) {
@@ -337,7 +337,6 @@ class InstallController extends Controller
 			
 			// Save data in session
 			session()->put('siteInfo', request()->except($exceptInput));
-			
 			return redirect()->to($this->installUrl . '/database');
 		}
 		
